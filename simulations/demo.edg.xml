@@ -1,4 +1,0 @@
-<edges xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
-    <edge from="1" id="1to2" to="2" type="a" />
-    <edge from="2" id="out" to="3"  type="a"/>
-</edges>

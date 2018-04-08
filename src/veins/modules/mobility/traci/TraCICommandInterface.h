@@ -50,6 +50,12 @@ class TraCICommandInterface
 		std::pair<double, double> getLonLat(const Coord&);
 		double getDistance(const Coord& position1, const Coord& position2, bool returnDrivingDistance);
 
+        /* Customized Simulation Methods by Jia Guo */
+        int getArrivedNumber();
+        int getCollidingVehiclesNumber();
+        int getCurrentTime();
+        int getLoadedNumber();
+
 		// Vehicle methods
 		/**
 		 * @brief Adds a vehicle to the simulation.
@@ -70,6 +76,10 @@ class TraCICommandInterface
 				Vehicle(TraCICommandInterface* traci, std::string nodeId) : traci(traci), nodeId(nodeId) {
 					connection = &traci->connection;
 				}
+
+				/* Customized Method by Jia Guo */
+				void setLaneChangeMode(int32_t bitset);
+				void changeLane(uint8_t laneIndex, int32_t duration);
 
 				void setSpeedMode(int32_t bitset);
 				void setSpeed(double speed);
@@ -133,6 +143,13 @@ class TraCICommandInterface
 				double getLength();
 				double getMaxSpeed();
 				double getMeanSpeed();
+
+                /* Customized Methods by Jia Guo */
+                int getVehicleNumber();
+                std::list<std::string> getVehicleIds();
+                double getOccupancy();
+                double getWaitingTime();
+                double getTravelTime();
 
 			protected:
 				TraCICommandInterface* traci;

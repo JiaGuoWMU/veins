@@ -700,7 +700,9 @@
 // clears the simulation of all not inserted vehicles (set: simulation)
 #define CMD_CLEAR_PENDING_VEHICLES 0x94
 
-
+/* Customized CONSTANT By Jia Guo */
+#define VAR_COLLIDING_VEHICLES_NUMBER 0x80
+#define VAR_COLLIDING_VEHICLES_IDS 0x81
 
 
 // add an instance (poi, polygon, vehicle, route)

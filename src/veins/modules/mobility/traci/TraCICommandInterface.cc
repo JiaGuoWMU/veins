@@ -106,6 +106,64 @@ double TraCICommandInterface::Road::getMeanSpeed() {
 	return traci->genericGetDouble(CMD_GET_EDGE_VARIABLE, roadId, LAST_STEP_MEAN_SPEED, RESPONSE_GET_EDGE_VARIABLE);
 }
 
+/* Customized Methods by Jia Guo */
+int TraCICommandInterface::Lane::getVehicleNumber() {
+    return traci->genericGetInt(CMD_GET_LANE_VARIABLE, laneId, LAST_STEP_VEHICLE_NUMBER, RESPONSE_GET_LANE_VARIABLE);
+}
+
+std::list<std::string> TraCICommandInterface::Lane::getVehicleIds() {
+    return traci->genericGetStringList(CMD_GET_LANE_VARIABLE, laneId, LAST_STEP_VEHICLE_ID_LIST, RESPONSE_GET_LANE_VARIABLE);
+}
+
+double TraCICommandInterface::Lane::getOccupancy() {
+    return traci->genericGetDouble(CMD_GET_LANE_VARIABLE, laneId, LAST_STEP_OCCUPANCY, RESPONSE_GET_LANE_VARIABLE);
+}
+
+double TraCICommandInterface::Lane::getWaitingTime() {
+    return traci->genericGetDouble(CMD_GET_LANE_VARIABLE, laneId, VAR_WAITING_TIME, RESPONSE_GET_LANE_VARIABLE);
+}
+
+double TraCICommandInterface::Lane::getTravelTime() {
+    return traci->genericGetDouble(CMD_GET_LANE_VARIABLE, laneId, VAR_CURRENT_TRAVELTIME, RESPONSE_GET_LANE_VARIABLE);
+}
+
+int TraCICommandInterface::getArrivedNumber() {
+    return genericGetInt(CMD_GET_SIM_VARIABLE, "", VAR_ARRIVED_VEHICLES_NUMBER, RESPONSE_GET_SIM_VARIABLE);
+}
+
+int TraCICommandInterface::getCollidingVehiclesNumber() {
+    return genericGetInt(CMD_GET_SIM_VARIABLE, "", VAR_ARRIVED_VEHICLES_NUMBER, RESPONSE_GET_SIM_VARIABLE);
+}
+
+int TraCICommandInterface::getCurrentTime() {
+    return genericGetInt(CMD_GET_SIM_VARIABLE, "", VAR_TIME_STEP, RESPONSE_GET_SIM_VARIABLE);
+}
+
+int TraCICommandInterface::getLoadedNumber() {
+    return genericGetInt(CMD_GET_SIM_VARIABLE, "", VAR_LOADED_VEHICLES_NUMBER, RESPONSE_GET_SIM_VARIABLE);
+}
+
+void TraCICommandInterface::Vehicle::setLaneChangeMode(int32_t bitset) {
+    uint8_t variableId = VAR_LANECHANGE_MODE;
+    uint8_t variableType = TYPE_INTEGER;
+    TraCIBuffer buf = traci->connection.query(CMD_SET_VEHICLE_VARIABLE, TraCIBuffer() << variableId << nodeId << variableType << bitset);
+    ASSERT(buf.eof());
+}
+
+void TraCICommandInterface::Vehicle::changeLane(uint8_t laneIndex, int32_t duration) {
+    uint8_t variableId = CMD_CHANGELANE;
+    uint8_t variableType = TYPE_COMPOUND;
+    int32_t count = 2;
+    uint8_t laneIndexT = TYPE_BYTE;
+    uint8_t timeT = TYPE_INTEGER;
+    int32_t time = duration*1000; //seconds to milliseconds
+    uint8_t durationT = TYPE_INTEGER;
+    TraCIBuffer buf = connection->query(CMD_SET_VEHICLE_VARIABLE, TraCIBuffer() << variableId << nodeId << variableType << count << laneIndexT << laneIndex << durationT << duration );
+    ASSERT(buf.eof());
+}
+
+/**********************************/
+
 std::string TraCICommandInterface::Vehicle::getRoadId() {
 	return traci->genericGetString(CMD_GET_VEHICLE_VARIABLE, nodeId, VAR_ROAD_ID, RESPONSE_GET_VEHICLE_VARIABLE);
 }

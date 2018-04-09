@@ -21,6 +21,7 @@ void SmartConeApp::initialize(int stage) {
         //Initializing members and pointers of your application goes here
         suggestedSpeed = 40; // based on LOS
         minSpeed = 53.3; // based on LOS
+        arrived = 0;
         //setup veins pointers
         mobility = TraCIMobilityAccess().get(getParentModule());
         traci = mobility->getCommandInterface();
@@ -68,8 +69,12 @@ void SmartConeApp::onWSM(WaveShortMessage* wsm) {
          */
         traciVehicle->slowDown(speed, 5000); //slow down over for at least 5s
     } else {
-        // ignore the message
+        // no action taken
     }
+
+    // keep sending the message
+    std::string msgStr(msg);
+    sendMessage(msgStr);
 
     if (!sentMessage) {
         sentMessage = true;
@@ -115,7 +120,6 @@ void SmartConeApp::handlePositionUpdate(cObject* obj) {
     //member variables such as currentPosition and currentSpeed are updated in the parent class
 
     BaseWaveApplLayer::handlePositionUpdate(obj);
-
 
     // Since all the probe vehicle are doing this at the same time, we do not
     // need to explicitly check all the edges

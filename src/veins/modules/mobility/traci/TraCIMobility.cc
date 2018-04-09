@@ -44,6 +44,7 @@ void TraCIMobility::Statistics::initialize()
 	maxSpeed = -MY_INFINITY;
 	totalDistance = 0;
 	totalCO2Emission = 0;
+	arrived = 0;
 }
 
 void TraCIMobility::Statistics::watch(cSimpleModule& )
@@ -52,6 +53,7 @@ void TraCIMobility::Statistics::watch(cSimpleModule& )
 	WATCH(minSpeed);
 	WATCH(maxSpeed);
 	WATCH(totalDistance);
+	WATCH(arrived);
 }
 
 void TraCIMobility::Statistics::recordScalars(cSimpleModule& module)
@@ -60,6 +62,7 @@ void TraCIMobility::Statistics::recordScalars(cSimpleModule& module)
 	module.recordScalar("startTime", startTime);
 	module.recordScalar("totalTime", totalTime);
 	module.recordScalar("stopTime", stopTime);
+	module.recordScalar("arrived", arrived);
 	if (minSpeed != MY_INFINITY) module.recordScalar("minSpeed", minSpeed);
 	if (maxSpeed != -MY_INFINITY) module.recordScalar("maxSpeed", maxSpeed);
 	module.recordScalar("totalDistance", totalDistance);
@@ -184,6 +187,7 @@ void TraCIMobility::nextPosition(const Coord& position, std::string road_id, dou
 	this->signals = signals;
 
 	changePosition();
+
 }
 
 void TraCIMobility::changePosition()
@@ -201,6 +205,10 @@ void TraCIMobility::changePosition()
 	// keep statistics (relative to last step)
 	if (statistics.startTime != simTime()) {
 		simtime_t updateInterval = simTime() - this->lastUpdate;
+
+	    if (road_id == "2") { // 23 is the road after the construction zone
+	        statistics.arrived = 1;
+	    }
 
 		double distance = move.getStartPos().distance(nextPos);
 		statistics.totalDistance += distance;

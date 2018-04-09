@@ -38,6 +38,7 @@ class SmartConeApp : public BaseWaveApplLayer {
 		int currentSubscribedServiceId;
 		double suggestedSpeed;
 		double minSpeed;
+		int arrived;
 
 		TraCIMobility* mobility;
         TraCICommandInterface* traci;

@@ -3,10 +3,10 @@
     <vType id="sporty car" vClass="passenger" maxSpeed="60" speedFactor="1.3" speedDev="0.1" sigma="0.1" />
     <vType id="trailer" vClass="trailer"  maxSpeed="30" speedFactor="1.1" speedDev="0.1" />
     <vType id="coach" vClass="coach"  maxSpeed="30" speedFactor="1." speedDev="0.1" />
-    <flow id="normal" type="normal car" begin="0" end="5000" number="5000" from="0" to="12" departPos="free" departLane="free"/>
-    <flow id="sporty" type="sporty car" begin="0" end="5000" number="300" from="1" to="12" departPos="free"  departLane="free" />
-    <flow id="coach" type="coach" begin="0" end="5000" number="300" from="1" to="12" departPos="free"  departLane="free" />
-    <flow id="trailer" type="trailer" begin="0" end="5000" number="700" from="1" to="12" departPos="free"  departLane="free"/>
+    <flow id="normal" type="normal car" begin="0" end="5000" number="10" from="0" to="12" departPos="free" departLane="free"/>
+    <flow id="sporty" type="sporty car" begin="0" end="5000" number="10" from="1" to="12" departPos="free"  departLane="free" />
+    <flow id="coach" type="coach" begin="0" end="5000" number="10" from="1" to="12" departPos="free"  departLane="free" />
+    <flow id="trailer" type="trailer" begin="0" end="5000" number="10" from="1" to="12" departPos="free"  departLane="free"/>
 </routes>
 
 <!-- <routes>

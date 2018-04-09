@@ -44,7 +44,7 @@ void TraCIMobility::Statistics::initialize()
 	maxSpeed = -MY_INFINITY;
 	totalDistance = 0;
 	totalCO2Emission = 0;
-	arrived = 0;
+	arrived = 0; // used for the throughput metric: number of vehicles passing the construction zone
 }
 
 void TraCIMobility::Statistics::watch(cSimpleModule& )
@@ -206,7 +206,7 @@ void TraCIMobility::changePosition()
 	if (statistics.startTime != simTime()) {
 		simtime_t updateInterval = simTime() - this->lastUpdate;
 
-	    if (road_id == "2") { // 23 is the road after the construction zone
+	    if (road_id == destination) { // 23 is the road after the construction zone
 	        statistics.arrived = 1;
 	    }
 

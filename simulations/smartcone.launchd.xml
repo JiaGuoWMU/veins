@@ -2,6 +2,7 @@
 <launch>
 	<copy file="smartcone.net.xml" />
 	<copy file="smartcone.rou.xml" />
+	<copy file="smartcone.add.xml" />
 	<copy file="smartcone.settings.xml" />
 	<copy file="smartcone.sumo.cfg" type="config" />
 </launch>

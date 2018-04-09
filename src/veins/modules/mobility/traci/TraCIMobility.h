@@ -65,6 +65,7 @@ class TraCIMobility : public BaseMobility
 				double totalCO2Emission; /**< for statistics: total CO2 emission */
 
 				/*Customized by Jia Guo*/
+				// used for the metric of throughput: number of vehicles passing the construction zone
 				int arrived;
 
 				void initialize();
@@ -167,6 +168,10 @@ class TraCIMobility : public BaseMobility
 		const static simsignalwrap_t parkingStateChangedSignal;
 
 		bool isParking;
+
+		/* Customized by Jia Guo */
+		// the 1st downstream road of the construction zone
+		std::string destination = "12";
 
 		virtual void fixIfHostGetsOutside(); /**< called after each read to check for (and handle) invalid positions */
 

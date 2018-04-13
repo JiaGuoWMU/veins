@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <iterator>
+#include <string>
 
 #include "veins/modules/mobility/traci/TraCIScenarioManager.h"
 #include "veins/modules/mobility/traci/TraCICommandInterface.h"
@@ -548,13 +549,44 @@ void TraCIScenarioManager::preInitializeModule(cModule* mod, const std::string& 
 }
 
 void TraCIScenarioManager::updateModulePosition(cModule* mod, const Coord& p, const std::string& edge, double speed, double angle, VehicleSignal signals) {
-	// update position in TraCIMobility
+
+    // update road of interest every 30s
+    uint32_t targetTime = simTime().inUnit(SIMTIME_MS);
+    if (targetTime % 30000 == 0) {
+        updateRoadOfInterest();
+    }
+
+    // update position in TraCIMobility
 	for (cModule::SubmoduleIterator iter(mod); !iter.end(); iter++) {
 		cModule* submod = SUBMODULE_ITERATOR_TO_MODULE(iter);
 		TraCIMobility* mm = dynamic_cast<TraCIMobility*>(submod);
 		if (!mm) continue;
 		mm->nextPosition(p, edge, speed, angle, signals);
 	}
+}
+
+/*Customized by Jia Guo*/
+void TraCIScenarioManager::updateRoadOfInterest() {
+    double minSpeed = 23.83;
+    for (int i = 2; i <= 10; i++) {
+        //std::cout<<"*****current Time: " << traci->getCurrentTime() << endl;
+        std::string roadId = std::to_string(i);
+        double meanSpeed = getCommandInterface()->road(roadId).getMeanSpeed(); // the mean speed of the edge
+        if (meanSpeed < minSpeed) { // congested and not the first road
+            //std::cout << roadId << "*****congested*****" << atoi(roadId.c_str()) << endl;
+            std::stringstream msg;
+            msg << i - 1 << "_0"; // right lane of the prev edge
+            roadOfInterest = msg.str();
+            //std::cout << "!!!!!!!!!!Target road is: " << roadOfInterest << endl;
+            break;
+        } else {
+            roadOfInterest.clear(); // reset
+        }
+    }
+}
+
+std::string TraCIScenarioManager::getRoadOfInterest(){
+    return roadOfInterest;
 }
 
 // name: host;Car;i=vehicle.gif

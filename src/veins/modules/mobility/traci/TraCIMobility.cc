@@ -75,6 +75,7 @@ void TraCIMobility::initialize(int stage)
 	{
 		BaseMobility::initialize(stage);
 
+//		move.setSpeed(31.29);
 		debug = par("debug");
 		antennaPositionOffset = par("antennaPositionOffset");
 		accidentCount = par("accidentCount");

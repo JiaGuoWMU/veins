@@ -84,6 +84,16 @@ void SmartConeApp::handlePositionUpdate(cObject* obj) {
     //member variables such as currentPosition and currentSpeed are updated in the parent class
 
     BaseWaveApplLayer::handlePositionUpdate(obj);
+    if (traciVehicle->getLaneId() == mobility->getManager()->getRoadOfInterest()) {
+        //std::cout << "********Lane change now" << endl;
+        //TODO: the duration should be at least the time estimated to pass the construction zone
+        // the duration is set to the max simulation time.
+        traciVehicle->changeLane(1, 1000 * 4000); // merge to the left lane
+        /*
+         * The enumeration index of the lane (0 is the rightmost lane, <NUMBER_LANES>-1 is the leftmost one)
+         */
+        traciVehicle->slowDown(suggestedSpeed, 5000); //slow down over for at least 5s
+    }
     if (!sentMessage && traciVehicle->getLaneId() == mobility->getManager()->getRoadOfInterest()) {
         sentMessage = true;
         WaveShortMessage* wsm = new WaveShortMessage();
@@ -99,15 +109,6 @@ void SmartConeApp::handlePositionUpdate(cObject* obj) {
             //send right away on CCH, because channel switching is disabled
             sendDown(wsm);
         }
-
-        //std::cout << "********Lane change now" << endl;
-        //TODO: the duration should be at least the time estimated to pass the construction zone
-        // the duration is set to the max simulation time.
-        traciVehicle->changeLane(1, 1000 * 4000); // merge to the left lane
-        /*
-         * The enumeration index of the lane (0 is the rightmost lane, <NUMBER_LANES>-1 is the leftmost one)
-         */
-        traciVehicle->slowDown(suggestedSpeed, 5000); //slow down over for at least 5s
     } else {
         // no action taken
     }

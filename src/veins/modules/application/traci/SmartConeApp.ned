@@ -26,6 +26,6 @@ import org.car2x.veins.modules.application.ieee80211p.BaseWaveApplLayer;
 //
 simple SmartConeApp extends BaseWaveApplLayer
 {
-    @class(MyVeinsApp);
-    string appName = default("My first Veins App!");
+    @class(SmartConeApp);
+    @display("i=block/app2");
 }

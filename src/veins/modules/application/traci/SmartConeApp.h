@@ -8,12 +8,6 @@
 #define SmartConeApp_H
 
 #include "veins/modules/application/ieee80211p/BaseWaveApplLayer.h"
-#include "veins/modules/mobility/traci/TraCIMobility.h"
-#include "veins/modules/mobility/traci/TraCICommandInterface.h"
-
-using Veins::TraCIMobility;
-using Veins::TraCICommandInterface;
-
 
 /**
  * @brief
@@ -30,30 +24,22 @@ using Veins::TraCICommandInterface;
 
 class SmartConeApp : public BaseWaveApplLayer {
 	public:
-		virtual void initialize(int stage);
-		virtual void finish();
+        virtual void initialize(int stage);
 	protected:
 		simtime_t lastDroveAt;
 		bool sentMessage;
 		int currentSubscribedServiceId;
+
 		double suggestedSpeed;
 		double minSpeed;
 		int arrived;
-
-		TraCIMobility* mobility;
-        TraCICommandInterface* traci;
-        TraCICommandInterface::Vehicle* traciVehicle;
         simtime_t lastSent; // the last time this sent a message
 
 	protected:
-        virtual void onBSM(BasicSafetyMessage* bsm);
         virtual void onWSM(WaveShortMessage* wsm);
-        virtual void onWSA(WaveServiceAdvertisment* wsa);
-
+        virtual void handlePositionUpdate(cObject* obj);
         virtual void handleSelfMsg(cMessage* msg);
-		virtual void handlePositionUpdate(cObject* obj);
-
-		void sendMessage(std::string blockedRoadId);
+        virtual void onWSA(WaveServiceAdvertisment* wsa);
 };
 
 #endif

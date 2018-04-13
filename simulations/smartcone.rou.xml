@@ -1,19 +1,5 @@
- <routes>
-    <vType id="normal car" vClass="passenger" maxSpeed="40" speedFactor="0.9" speedDev="0.2" sigma="0.5" />
-    <vType id="sporty car" vClass="passenger" maxSpeed="60" speedFactor="1.3" speedDev="0.1" sigma="0.1" />
-    <vType id="trailer" vClass="trailer"  maxSpeed="30" speedFactor="1.1" speedDev="0.1" />
-    <vType id="coach" vClass="coach"  maxSpeed="30" speedFactor="1." speedDev="0.1" />
-    <flow id="normal" type="normal car" begin="0" end="5000" number="2000" from="0" to="12" departPos="free" departLane="free"/>
-    <flow id="sporty" type="sporty car" begin="0" end="5000" number="1000" from="1" to="12" departPos="free"  departLane="free" />
-    <flow id="coach" type="coach" begin="0" end="5000" number="600" from="1" to="12" departPos="free"  departLane="free" />
-    <flow id="trailer" type="trailer" begin="0" end="5000" number="400" from="1" to="12" departPos="free"  departLane="free"/>
+<routes>
+    <vType id="normal car" vClass="passenger" maxSpeed="40" speedFactor="1.0" speedDev="0.2" sigma="0.5" />
+    <flow id="lane0" type="normal car" begin="0" end="4000" vehsPerHour="2000" from="0" to="12" departLane="free" departSpeed="max" />
+    <flow id="lane1" type="normal car" begin="0" end="4000" vehsPerHour="2000" from="0" to="12" departLane="free" departSpeed="max" />
 </routes>
-
-<!-- <routes>
-	<vType accel="1.0" decel="5.0" id="CarA" length="2.0" maxSpeed="100.0" sigma="0.0" />
-	<vType accel="2.0" decel="4.0" id="CarB" length="5.0" maxSpeed="120.0" sigma="0.5" />
-	<route id="route0" edges="1 23" />
-	<vehicle depart="1" id="veh0" route="route0" type="Car" />
-	<flow id="flow0" type="CarA" route="route0" begin="0" period="3" number="195"/>
-	<flow id="flow1" type="CarB" route="route0" begin="2" period="3" number="195" color="0,1,0"/>
-</routes> -->

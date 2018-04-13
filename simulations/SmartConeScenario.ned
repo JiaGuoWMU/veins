@@ -18,13 +18,9 @@ import org.car2x.veins.nodes.RSU;
 
 network SmartConeScenario extends Scenario
 {
-    @display("bgb=780.656,404.412;bgl=7");
-    //@display("bgl=3");
+    @display("bgb=572,317");
     submodules:
         rsu[1]: RSU {
-            @display("p=150,140;i=veins/sign/yellowdiamond;is=vs");
-            
+            @display("p=73,174;i=veins/sign/yellowdiamond;is=vs");
         }
-    //inherited from Scenario
-    connections allowunconnected:
 }

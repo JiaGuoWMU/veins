@@ -29,6 +29,7 @@ class SmartConeApp : public BaseWaveApplLayer {
 		simtime_t lastDroveAt;
 		bool sentMessage;
 		int currentSubscribedServiceId;
+		std::string lastRoad;
 
 		double suggestedSpeed;
 		double minSpeed;
@@ -38,8 +39,8 @@ class SmartConeApp : public BaseWaveApplLayer {
 	protected:
         virtual void onWSM(WaveShortMessage* wsm);
         virtual void handlePositionUpdate(cObject* obj);
-        virtual void handleSelfMsg(cMessage* msg);
-        virtual void onWSA(WaveServiceAdvertisment* wsa);
+//        virtual void handleSelfMsg(cMessage* msg);
+//        virtual void onWSA(WaveServiceAdvertisment* wsa);
 };
 
 #endif

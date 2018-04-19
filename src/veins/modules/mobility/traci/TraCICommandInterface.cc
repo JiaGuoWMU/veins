@@ -127,6 +127,14 @@ double TraCICommandInterface::Lane::getTravelTime() {
     return traci->genericGetDouble(CMD_GET_LANE_VARIABLE, laneId, VAR_CURRENT_TRAVELTIME, RESPONSE_GET_LANE_VARIABLE);
 }
 
+std::list<std::string> TraCICommandInterface::Road::getVehicleIds() {
+    return traci->genericGetStringList(CMD_GET_EDGE_VARIABLE, roadId, LAST_STEP_VEHICLE_ID_LIST, RESPONSE_GET_EDGE_VARIABLE);
+}
+
+double TraCICommandInterface::Road::getVehicleNumber() {
+    return traci->genericGetInt(CMD_GET_EDGE_VARIABLE, roadId, LAST_STEP_VEHICLE_NUMBER, RESPONSE_GET_EDGE_VARIABLE);
+}
+
 int TraCICommandInterface::getArrivedNumber() {
     return genericGetInt(CMD_GET_SIM_VARIABLE, "", VAR_ARRIVED_VEHICLES_NUMBER, RESPONSE_GET_SIM_VARIABLE);
 }

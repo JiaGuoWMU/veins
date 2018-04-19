@@ -121,6 +121,10 @@ class TraCICommandInterface
 				double getCurrentTravelTime();
 				double getMeanSpeed();
 
+				/*Customized by Jia Guo*/
+				double getVehicleNumber();
+				std::list<std::string> getVehicleIds();
+
 			protected:
 				TraCICommandInterface* traci;
 				TraCIConnection* connection;

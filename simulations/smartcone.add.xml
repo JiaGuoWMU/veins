@@ -1,4 +1,4 @@
-<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
-	<edgeData id="edgelane" file="edge.out.xml" freq="60"/>
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+	<edgeData id="edge" file="edge.out.xml" freq="60"/>
+	<laneData id="lane" file="lane.out.xml" freq="60"/>
 </additional>

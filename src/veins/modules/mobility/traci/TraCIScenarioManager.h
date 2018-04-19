@@ -95,8 +95,10 @@ class TraCIScenarioManager : public cSimpleModule
 
 		TraCICommandInterface* getCommandInterface() const { return commandIfc; }
 
+		/*Customized by Jia Guo*/
 		void updateRoadOfInterest();
 		std::string getRoadOfInterest();
+		std::string getLaneOfInterest();
 
 		bool getAutoShutdownTriggered() {
 			return autoShutdownTriggered;
@@ -107,7 +109,15 @@ class TraCIScenarioManager : public cSimpleModule
 		}
 
 	protected:
+		/*Customized by Jia Guo*/
 		std::string roadOfInterest;
+		std::string laneOfInterest;
+		double minSpeed;
+		double suggestedSpeed;
+		double maxDensity;
+		int numOfLane;
+		bool downstreamCongested;
+
 		bool debug; /**< whether to emit debug messages */
 		simtime_t connectAt; /**< when to connect to TraCI server (must be the initial timestep of the server) */
 		simtime_t firstStepAt; /**< when to start synchronizing with the TraCI server (-1: immediately after connecting) */
